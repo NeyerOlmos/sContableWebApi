@@ -1,0 +1,1042 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sContableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asiento_Contable">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_folio" Type="int" Nullable="false" />
+          <Property Name="detalle" Type="varchar(max)" />
+          <Property Name="debitos" Type="money" />
+          <Property Name="creditos" Type="money" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="id_Comprobante" Type="int" />
+          <Property Name="id_Libro_Diario" Type="int" />
+          <Property Name="id_TiposdeAsientos" Type="int" />
+          <Property Name="id_PlanDeCuentas" Type="int" />
+        </EntityType>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="nroCuenta" Type="int" />
+        </EntityType>
+        <EntityType Name="Centro_Costos">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripciom" Type="varchar(max)" />
+          <Property Name="importe" Type="int" />
+          <Property Name="id_departamento" Type="int" />
+        </EntityType>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="nro" />
+          </Key>
+          <Property Name="nro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_Emision" Type="datetime" Nullable="false" />
+          <Property Name="cifra" Type="money" />
+          <Property Name="estado" Type="int" />
+          <Property Name="id_Banco" Type="int" />
+        </EntityType>
+        <EntityType Name="Comprobante">
+          <Key>
+            <PropertyRef Name="Nro" />
+          </Key>
+          <Property Name="Nro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="concepto" Type="varchar(max)" />
+          <Property Name="estado" Type="varchar(max)" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="debitos" Type="money" />
+          <Property Name="creditos" Type="money" />
+          <Property Name="id_tipodecomprobante" Type="int" />
+          <Property Name="id_cuenta" Type="int" />
+          <Property Name="id_Moneda" Type="int" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cod" Type="varchar(max)" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="cta_padre" Type="int" />
+          <Property Name="id_PlanDeCuentas" Type="int" />
+          <Property Name="id_Banco" Type="int" />
+          <Property Name="id_Moneda" Type="int" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="id_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NIT" Type="int" Nullable="false" />
+          <Property Name="nombre_RS" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Libro_Diario">
+          <Key>
+            <PropertyRef Name="cod" />
+          </Key>
+          <Property Name="cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="detalle" Type="varchar(max)" />
+          <Property Name="FM" Type="int" />
+          <Property Name="parcial" Type="money" />
+          <Property Name="debe" Type="money" />
+          <Property Name="haber" Type="money" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="simbolo" Type="varchar(max)" Nullable="false" />
+          <Property Name="abreviatura" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plan_Cuenta">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" />
+          <Property Name="id_empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Tipo_Asientos">
+          <Key>
+            <PropertyRef Name="cod" />
+          </Key>
+          <Property Name="cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Tipo_Cambio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="monto" Type="money" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="id_moneda" Type="int" />
+        </EntityType>
+        <EntityType Name="Tipo_Comprobante">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__Asiento_C__id_Co__534D60F1">
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comprobante">
+              <PropertyRef Name="Nro" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_Comprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asiento_C__id_Li__5441852A">
+          <End Role="Libro_Diario" Type="Self.Libro_Diario" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Libro_Diario">
+              <PropertyRef Name="cod" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_Libro_Diario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asiento_C__id_Pl__5629CD9C">
+          <End Role="Plan_Cuenta" Type="Self.Plan_Cuenta" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Cuenta">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_PlanDeCuentas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asiento_C__id_Ti__5535A963">
+          <End Role="Tipo_Asientos" Type="Self.Tipo_Asientos" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Asientos">
+              <PropertyRef Name="cod" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_TiposdeAsientos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Centro_Co__id_de__5AEE82B9">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Centro_Costos" Type="Self.Centro_Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Centro_Costos">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cheque__id_Banco__5EBF139D">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="id_Banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comproban__id_cu__5812160E">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comprobante">
+              <PropertyRef Name="id_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comproban__id_Mo__5165187F">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comprobante">
+              <PropertyRef Name="id_Moneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comproban__id_ti__5070F446">
+          <End Role="Tipo_Comprobante" Type="Self.Tipo_Comprobante" Multiplicity="0..1" />
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Comprobante">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Comprobante">
+              <PropertyRef Name="id_tipodecomprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__cta_padr__571DF1D5">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="Cuenta1" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta1">
+              <PropertyRef Name="cta_padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__id_Banco__5CD6CB2B">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="id_Banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__id_Moned__5DCAEF64">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="id_Moneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__id_PlanD__5BE2A6F2">
+          <End Role="Plan_Cuenta" Type="Self.Plan_Cuenta" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Cuenta">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="id_PlanDeCuentas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departame__id_em__59FA5E80">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plan_Cuen__id_em__59063A47">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Plan_Cuenta" Type="Self.Plan_Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plan_Cuenta">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipo_Camb__id_mo__52593CB8">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Tipo_Cambio" Type="Self.Tipo_Cambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tipo_Cambio">
+              <PropertyRef Name="id_moneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sContableModelStoreContainer">
+          <EntitySet Name="Asiento_Contable" EntityType="Self.Asiento_Contable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banco" EntityType="Self.Banco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Centro_Costos" EntityType="Self.Centro_Costos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comprobante" EntityType="Self.Comprobante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Libro_Diario" EntityType="Self.Libro_Diario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan_Cuenta" EntityType="Self.Plan_Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Asientos" EntityType="Self.Tipo_Asientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Cambio" EntityType="Self.Tipo_Cambio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Comprobante" EntityType="Self.Tipo_Comprobante" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Asiento_C__id_Co__534D60F1" Association="Self.FK__Asiento_C__id_Co__534D60F1">
+            <End Role="Comprobante" EntitySet="Comprobante" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asiento_C__id_Li__5441852A" Association="Self.FK__Asiento_C__id_Li__5441852A">
+            <End Role="Libro_Diario" EntitySet="Libro_Diario" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asiento_C__id_Pl__5629CD9C" Association="Self.FK__Asiento_C__id_Pl__5629CD9C">
+            <End Role="Plan_Cuenta" EntitySet="Plan_Cuenta" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asiento_C__id_Ti__5535A963" Association="Self.FK__Asiento_C__id_Ti__5535A963">
+            <End Role="Tipo_Asientos" EntitySet="Tipo_Asientos" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Centro_Co__id_de__5AEE82B9" Association="Self.FK__Centro_Co__id_de__5AEE82B9">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Centro_Costos" EntitySet="Centro_Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cheque__id_Banco__5EBF139D" Association="Self.FK__Cheque__id_Banco__5EBF139D">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comproban__id_cu__5812160E" Association="Self.FK__Comproban__id_cu__5812160E">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Comprobante" EntitySet="Comprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comproban__id_Mo__5165187F" Association="Self.FK__Comproban__id_Mo__5165187F">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Comprobante" EntitySet="Comprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comproban__id_ti__5070F446" Association="Self.FK__Comproban__id_ti__5070F446">
+            <End Role="Tipo_Comprobante" EntitySet="Tipo_Comprobante" />
+            <End Role="Comprobante" EntitySet="Comprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__cta_padr__571DF1D5" Association="Self.FK__Cuenta__cta_padr__571DF1D5">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Cuenta1" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__id_Banco__5CD6CB2B" Association="Self.FK__Cuenta__id_Banco__5CD6CB2B">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__id_Moned__5DCAEF64" Association="Self.FK__Cuenta__id_Moned__5DCAEF64">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__id_PlanD__5BE2A6F2" Association="Self.FK__Cuenta__id_PlanD__5BE2A6F2">
+            <End Role="Plan_Cuenta" EntitySet="Plan_Cuenta" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departame__id_em__59FA5E80" Association="Self.FK__Departame__id_em__59FA5E80">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plan_Cuen__id_em__59063A47" Association="Self.FK__Plan_Cuen__id_em__59063A47">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Plan_Cuenta" EntitySet="Plan_Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipo_Camb__id_mo__52593CB8" Association="Self.FK__Tipo_Camb__id_mo__52593CB8">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Tipo_Cambio" EntitySet="Tipo_Cambio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sContableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asiento_Contable">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_folio" Type="Int32" Nullable="false" />
+          <Property Name="detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="debitos" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="creditos" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="id_Comprobante" Type="Int32" />
+          <Property Name="id_Libro_Diario" Type="Int32" />
+          <Property Name="id_TiposdeAsientos" Type="Int32" />
+          <Property Name="id_PlanDeCuentas" Type="Int32" />
+          <NavigationProperty Name="Comprobante" Relationship="Self.FK__Asiento_C__id_Co__534D60F1" FromRole="Asiento_Contable" ToRole="Comprobante" />
+          <NavigationProperty Name="Libro_Diario" Relationship="Self.FK__Asiento_C__id_Li__5441852A" FromRole="Asiento_Contable" ToRole="Libro_Diario" />
+          <NavigationProperty Name="Plan_Cuenta" Relationship="Self.FK__Asiento_C__id_Pl__5629CD9C" FromRole="Asiento_Contable" ToRole="Plan_Cuenta" />
+          <NavigationProperty Name="Tipo_Asientos" Relationship="Self.FK__Asiento_C__id_Ti__5535A963" FromRole="Asiento_Contable" ToRole="Tipo_Asientos" />
+        </EntityType>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="nroCuenta" Type="Int32" />
+          <NavigationProperty Name="Cheques" Relationship="Self.FK__Cheque__id_Banco__5EBF139D" FromRole="Banco" ToRole="Cheque" />
+          <NavigationProperty Name="Cuentas" Relationship="Self.FK__Cuenta__id_Banco__5CD6CB2B" FromRole="Banco" ToRole="Cuenta" />
+        </EntityType>
+        <EntityType Name="Centro_Costos">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripciom" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="importe" Type="Int32" />
+          <Property Name="id_departamento" Type="Int32" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK__Centro_Co__id_de__5AEE82B9" FromRole="Centro_Costos" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="nro" />
+          </Key>
+          <Property Name="nro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_Emision" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cifra" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="id_Banco" Type="Int32" />
+          <NavigationProperty Name="Banco" Relationship="Self.FK__Cheque__id_Banco__5EBF139D" FromRole="Cheque" ToRole="Banco" />
+        </EntityType>
+        <EntityType Name="Comprobante">
+          <Key>
+            <PropertyRef Name="Nro" />
+          </Key>
+          <Property Name="Nro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="concepto" Type="String" />
+          <Property Name="estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="debitos" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="creditos" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="id_tipodecomprobante" Type="Int32" />
+          <Property Name="id_cuenta" Type="Int32" />
+          <Property Name="id_Moneda" Type="Int32" />
+          <NavigationProperty Name="Asiento_Contable" Relationship="Self.FK__Asiento_C__id_Co__534D60F1" FromRole="Comprobante" ToRole="Asiento_Contable" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Comproban__id_cu__5812160E" FromRole="Comprobante" ToRole="Cuenta" />
+          <NavigationProperty Name="Moneda" Relationship="Self.FK__Comproban__id_Mo__5165187F" FromRole="Comprobante" ToRole="Moneda" />
+          <NavigationProperty Name="Tipo_Comprobante" Relationship="Self.FK__Comproban__id_ti__5070F446" FromRole="Comprobante" ToRole="Tipo_Comprobante" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod" Type="String" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cta_padre" Type="Int32" />
+          <Property Name="id_PlanDeCuentas" Type="Int32" />
+          <Property Name="id_Banco" Type="Int32" />
+          <Property Name="id_Moneda" Type="Int32" />
+          <NavigationProperty Name="Banco" Relationship="Self.FK__Cuenta__id_Banco__5CD6CB2B" FromRole="Cuenta" ToRole="Banco" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.FK__Comproban__id_cu__5812160E" FromRole="Cuenta" ToRole="Comprobante" />
+          <NavigationProperty Name="Cuenta1" Relationship="Self.FK__Cuenta__cta_padr__571DF1D5" FromRole="Cuenta" ToRole="Cuenta1" />
+          <NavigationProperty Name="Cuenta2" Relationship="Self.FK__Cuenta__cta_padr__571DF1D5" FromRole="Cuenta1" ToRole="Cuenta" />
+          <NavigationProperty Name="Moneda" Relationship="Self.FK__Cuenta__id_Moned__5DCAEF64" FromRole="Cuenta" ToRole="Moneda" />
+          <NavigationProperty Name="Plan_Cuenta" Relationship="Self.FK__Cuenta__id_PlanD__5BE2A6F2" FromRole="Cuenta" ToRole="Plan_Cuenta" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" />
+          <NavigationProperty Name="Centro_Costos" Relationship="Self.FK__Centro_Co__id_de__5AEE82B9" FromRole="Departamento" ToRole="Centro_Costos" />
+          <NavigationProperty Name="Empresa" Relationship="Self.FK__Departame__id_em__59FA5E80" FromRole="Departamento" ToRole="Empresa" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NIT" Type="Int32" Nullable="false" />
+          <Property Name="nombre_RS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departamentoes" Relationship="Self.FK__Departame__id_em__59FA5E80" FromRole="Empresa" ToRole="Departamento" />
+          <NavigationProperty Name="Plan_Cuenta" Relationship="Self.FK__Plan_Cuen__id_em__59063A47" FromRole="Empresa" ToRole="Plan_Cuenta" />
+        </EntityType>
+        <EntityType Name="Libro_Diario">
+          <Key>
+            <PropertyRef Name="cod" />
+          </Key>
+          <Property Name="cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FM" Type="Int32" />
+          <Property Name="parcial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="debe" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="haber" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Asiento_Contable" Relationship="Self.FK__Asiento_C__id_Li__5441852A" FromRole="Libro_Diario" ToRole="Asiento_Contable" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="simbolo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="abreviatura" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.FK__Comproban__id_Mo__5165187F" FromRole="Moneda" ToRole="Comprobante" />
+          <NavigationProperty Name="Cuentas" Relationship="Self.FK__Cuenta__id_Moned__5DCAEF64" FromRole="Moneda" ToRole="Cuenta" />
+          <NavigationProperty Name="Tipo_Cambio" Relationship="Self.FK__Tipo_Camb__id_mo__52593CB8" FromRole="Moneda" ToRole="Tipo_Cambio" />
+        </EntityType>
+        <EntityType Name="Plan_Cuenta">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_empresa" Type="Int32" />
+          <NavigationProperty Name="Asiento_Contable" Relationship="Self.FK__Asiento_C__id_Pl__5629CD9C" FromRole="Plan_Cuenta" ToRole="Asiento_Contable" />
+          <NavigationProperty Name="Cuentas" Relationship="Self.FK__Cuenta__id_PlanD__5BE2A6F2" FromRole="Plan_Cuenta" ToRole="Cuenta" />
+          <NavigationProperty Name="Empresa" Relationship="Self.FK__Plan_Cuen__id_em__59063A47" FromRole="Plan_Cuenta" ToRole="Empresa" />
+        </EntityType>
+        <EntityType Name="Tipo_Asientos">
+          <Key>
+            <PropertyRef Name="cod" />
+          </Key>
+          <Property Name="cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Asiento_Contable" Relationship="Self.FK__Asiento_C__id_Ti__5535A963" FromRole="Tipo_Asientos" ToRole="Asiento_Contable" />
+        </EntityType>
+        <EntityType Name="Tipo_Cambio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="monto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="id_moneda" Type="Int32" />
+          <NavigationProperty Name="Moneda" Relationship="Self.FK__Tipo_Camb__id_mo__52593CB8" FromRole="Tipo_Cambio" ToRole="Moneda" />
+        </EntityType>
+        <EntityType Name="Tipo_Comprobante">
+          <Key>
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="Cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.FK__Comproban__id_ti__5070F446" FromRole="Tipo_Comprobante" ToRole="Comprobante" />
+        </EntityType>
+        <Association Name="FK__Asiento_C__id_Co__534D60F1">
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comprobante">
+              <PropertyRef Name="Nro" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_Comprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asiento_C__id_Li__5441852A">
+          <End Role="Libro_Diario" Type="Self.Libro_Diario" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Libro_Diario">
+              <PropertyRef Name="cod" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_Libro_Diario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asiento_C__id_Pl__5629CD9C">
+          <End Role="Plan_Cuenta" Type="Self.Plan_Cuenta" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Cuenta">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_PlanDeCuentas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asiento_C__id_Ti__5535A963">
+          <End Role="Tipo_Asientos" Type="Self.Tipo_Asientos" Multiplicity="0..1" />
+          <End Role="Asiento_Contable" Type="Self.Asiento_Contable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Asientos">
+              <PropertyRef Name="cod" />
+            </Principal>
+            <Dependent Role="Asiento_Contable">
+              <PropertyRef Name="id_TiposdeAsientos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cheque__id_Banco__5EBF139D">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="id_Banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__id_Banco__5CD6CB2B">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="id_Banco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Centro_Co__id_de__5AEE82B9">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Centro_Costos" Type="Self.Centro_Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Centro_Costos">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comproban__id_cu__5812160E">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comprobante">
+              <PropertyRef Name="id_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comproban__id_Mo__5165187F">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comprobante">
+              <PropertyRef Name="id_Moneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comproban__id_ti__5070F446">
+          <End Role="Tipo_Comprobante" Type="Self.Tipo_Comprobante" Multiplicity="0..1" />
+          <End Role="Comprobante" Type="Self.Comprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Comprobante">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Comprobante">
+              <PropertyRef Name="id_tipodecomprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__cta_padr__571DF1D5">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="Cuenta1" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta1">
+              <PropertyRef Name="cta_padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__id_Moned__5DCAEF64">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="id_Moneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__id_PlanD__5BE2A6F2">
+          <End Role="Plan_Cuenta" Type="Self.Plan_Cuenta" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan_Cuenta">
+              <PropertyRef Name="Cod" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="id_PlanDeCuentas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departame__id_em__59FA5E80">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plan_Cuen__id_em__59063A47">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Plan_Cuenta" Type="Self.Plan_Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plan_Cuenta">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tipo_Camb__id_mo__52593CB8">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+          <End Role="Tipo_Cambio" Type="Self.Tipo_Cambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tipo_Cambio">
+              <PropertyRef Name="id_moneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sContableEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asiento_Contable" EntityType="Self.Asiento_Contable" />
+          <EntitySet Name="Bancoes" EntityType="Self.Banco" />
+          <EntitySet Name="Centro_Costos" EntityType="Self.Centro_Costos" />
+          <EntitySet Name="Cheques" EntityType="Self.Cheque" />
+          <EntitySet Name="Comprobantes" EntityType="Self.Comprobante" />
+          <EntitySet Name="Cuentas" EntityType="Self.Cuenta" />
+          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresa" />
+          <EntitySet Name="Libro_Diario" EntityType="Self.Libro_Diario" />
+          <EntitySet Name="Monedas" EntityType="Self.Moneda" />
+          <EntitySet Name="Plan_Cuenta" EntityType="Self.Plan_Cuenta" />
+          <EntitySet Name="Tipo_Asientos" EntityType="Self.Tipo_Asientos" />
+          <EntitySet Name="Tipo_Cambio" EntityType="Self.Tipo_Cambio" />
+          <EntitySet Name="Tipo_Comprobante" EntityType="Self.Tipo_Comprobante" />
+          <AssociationSet Name="FK__Asiento_C__id_Co__534D60F1" Association="Self.FK__Asiento_C__id_Co__534D60F1">
+            <End Role="Comprobante" EntitySet="Comprobantes" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asiento_C__id_Li__5441852A" Association="Self.FK__Asiento_C__id_Li__5441852A">
+            <End Role="Libro_Diario" EntitySet="Libro_Diario" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asiento_C__id_Pl__5629CD9C" Association="Self.FK__Asiento_C__id_Pl__5629CD9C">
+            <End Role="Plan_Cuenta" EntitySet="Plan_Cuenta" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asiento_C__id_Ti__5535A963" Association="Self.FK__Asiento_C__id_Ti__5535A963">
+            <End Role="Tipo_Asientos" EntitySet="Tipo_Asientos" />
+            <End Role="Asiento_Contable" EntitySet="Asiento_Contable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cheque__id_Banco__5EBF139D" Association="Self.FK__Cheque__id_Banco__5EBF139D">
+            <End Role="Banco" EntitySet="Bancoes" />
+            <End Role="Cheque" EntitySet="Cheques" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__id_Banco__5CD6CB2B" Association="Self.FK__Cuenta__id_Banco__5CD6CB2B">
+            <End Role="Banco" EntitySet="Bancoes" />
+            <End Role="Cuenta" EntitySet="Cuentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Centro_Co__id_de__5AEE82B9" Association="Self.FK__Centro_Co__id_de__5AEE82B9">
+            <End Role="Departamento" EntitySet="Departamentoes" />
+            <End Role="Centro_Costos" EntitySet="Centro_Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comproban__id_cu__5812160E" Association="Self.FK__Comproban__id_cu__5812160E">
+            <End Role="Cuenta" EntitySet="Cuentas" />
+            <End Role="Comprobante" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comproban__id_Mo__5165187F" Association="Self.FK__Comproban__id_Mo__5165187F">
+            <End Role="Moneda" EntitySet="Monedas" />
+            <End Role="Comprobante" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comproban__id_ti__5070F446" Association="Self.FK__Comproban__id_ti__5070F446">
+            <End Role="Tipo_Comprobante" EntitySet="Tipo_Comprobante" />
+            <End Role="Comprobante" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__cta_padr__571DF1D5" Association="Self.FK__Cuenta__cta_padr__571DF1D5">
+            <End Role="Cuenta" EntitySet="Cuentas" />
+            <End Role="Cuenta1" EntitySet="Cuentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__id_Moned__5DCAEF64" Association="Self.FK__Cuenta__id_Moned__5DCAEF64">
+            <End Role="Moneda" EntitySet="Monedas" />
+            <End Role="Cuenta" EntitySet="Cuentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__id_PlanD__5BE2A6F2" Association="Self.FK__Cuenta__id_PlanD__5BE2A6F2">
+            <End Role="Plan_Cuenta" EntitySet="Plan_Cuenta" />
+            <End Role="Cuenta" EntitySet="Cuentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departame__id_em__59FA5E80" Association="Self.FK__Departame__id_em__59FA5E80">
+            <End Role="Empresa" EntitySet="Empresas" />
+            <End Role="Departamento" EntitySet="Departamentoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plan_Cuen__id_em__59063A47" Association="Self.FK__Plan_Cuen__id_em__59063A47">
+            <End Role="Empresa" EntitySet="Empresas" />
+            <End Role="Plan_Cuenta" EntitySet="Plan_Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tipo_Camb__id_mo__52593CB8" Association="Self.FK__Tipo_Camb__id_mo__52593CB8">
+            <End Role="Moneda" EntitySet="Monedas" />
+            <End Role="Tipo_Cambio" EntitySet="Tipo_Cambio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sContableModelStoreContainer" CdmEntityContainer="sContableEntities">
+          <EntitySetMapping Name="Asiento_Contable">
+            <EntityTypeMapping TypeName="sContableModel.Asiento_Contable">
+              <MappingFragment StoreEntitySet="Asiento_Contable">
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="Nro_folio" ColumnName="Nro_folio" />
+                <ScalarProperty Name="detalle" ColumnName="detalle" />
+                <ScalarProperty Name="debitos" ColumnName="debitos" />
+                <ScalarProperty Name="creditos" ColumnName="creditos" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="id_Comprobante" ColumnName="id_Comprobante" />
+                <ScalarProperty Name="id_Libro_Diario" ColumnName="id_Libro_Diario" />
+                <ScalarProperty Name="id_TiposdeAsientos" ColumnName="id_TiposdeAsientos" />
+                <ScalarProperty Name="id_PlanDeCuentas" ColumnName="id_PlanDeCuentas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bancoes">
+            <EntityTypeMapping TypeName="sContableModel.Banco">
+              <MappingFragment StoreEntitySet="Banco">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="nroCuenta" ColumnName="nroCuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Centro_Costos">
+            <EntityTypeMapping TypeName="sContableModel.Centro_Costos">
+              <MappingFragment StoreEntitySet="Centro_Costos">
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="descripciom" ColumnName="descripciom" />
+                <ScalarProperty Name="importe" ColumnName="importe" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cheques">
+            <EntityTypeMapping TypeName="sContableModel.Cheque">
+              <MappingFragment StoreEntitySet="Cheque">
+                <ScalarProperty Name="nro" ColumnName="nro" />
+                <ScalarProperty Name="fecha_Emision" ColumnName="fecha_Emision" />
+                <ScalarProperty Name="cifra" ColumnName="cifra" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_Banco" ColumnName="id_Banco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comprobantes">
+            <EntityTypeMapping TypeName="sContableModel.Comprobante">
+              <MappingFragment StoreEntitySet="Comprobante">
+                <ScalarProperty Name="Nro" ColumnName="Nro" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="concepto" ColumnName="concepto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="debitos" ColumnName="debitos" />
+                <ScalarProperty Name="creditos" ColumnName="creditos" />
+                <ScalarProperty Name="id_tipodecomprobante" ColumnName="id_tipodecomprobante" />
+                <ScalarProperty Name="id_cuenta" ColumnName="id_cuenta" />
+                <ScalarProperty Name="id_Moneda" ColumnName="id_Moneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuentas">
+            <EntityTypeMapping TypeName="sContableModel.Cuenta">
+              <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cta_padre" ColumnName="cta_padre" />
+                <ScalarProperty Name="id_PlanDeCuentas" ColumnName="id_PlanDeCuentas" />
+                <ScalarProperty Name="id_Banco" ColumnName="id_Banco" />
+                <ScalarProperty Name="id_Moneda" ColumnName="id_Moneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentoes">
+            <EntityTypeMapping TypeName="sContableModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="sContableModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NIT" ColumnName="NIT" />
+                <ScalarProperty Name="nombre_RS" ColumnName="nombre_RS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Libro_Diario">
+            <EntityTypeMapping TypeName="sContableModel.Libro_Diario">
+              <MappingFragment StoreEntitySet="Libro_Diario">
+                <ScalarProperty Name="cod" ColumnName="cod" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="detalle" ColumnName="detalle" />
+                <ScalarProperty Name="FM" ColumnName="FM" />
+                <ScalarProperty Name="parcial" ColumnName="parcial" />
+                <ScalarProperty Name="debe" ColumnName="debe" />
+                <ScalarProperty Name="haber" ColumnName="haber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monedas">
+            <EntityTypeMapping TypeName="sContableModel.Moneda">
+              <MappingFragment StoreEntitySet="Moneda">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="simbolo" ColumnName="simbolo" />
+                <ScalarProperty Name="abreviatura" ColumnName="abreviatura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plan_Cuenta">
+            <EntityTypeMapping TypeName="sContableModel.Plan_Cuenta">
+              <MappingFragment StoreEntitySet="Plan_Cuenta">
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Asientos">
+            <EntityTypeMapping TypeName="sContableModel.Tipo_Asientos">
+              <MappingFragment StoreEntitySet="Tipo_Asientos">
+                <ScalarProperty Name="cod" ColumnName="cod" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Cambio">
+            <EntityTypeMapping TypeName="sContableModel.Tipo_Cambio">
+              <MappingFragment StoreEntitySet="Tipo_Cambio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Comprobante">
+            <EntityTypeMapping TypeName="sContableModel.Tipo_Comprobante">
+              <MappingFragment StoreEntitySet="Tipo_Comprobante">
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

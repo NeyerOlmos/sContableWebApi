@@ -21,7 +21,7 @@ namespace sContable.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("authSisContable", throwIfV1Schema: false)
         {
         }
         

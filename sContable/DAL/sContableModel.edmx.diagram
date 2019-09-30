@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a36110b7f4a4ff28d7847af65ddcd58" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="sContableModel.Asiento_Contable" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Banco" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Centro_Costos" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Cheque" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Comprobante" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Cuenta" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Departamento" Width="1.5" PointX="3.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Empresa" Width="1.5" PointX="1.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Libro_Diario" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Moneda" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Plan_Cuenta" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Tipo_Asientos" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Tipo_Cambio" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sContableModel.Tipo_Comprobante" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="sContableModel.FK__Asiento_C__id_Co__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Asiento_C__id_Li__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Asiento_C__id_Pl__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Asiento_C__id_Ti__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Cheque__id_Banco__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Cuenta__id_Banco__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Centro_Co__id_de__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Comproban__id_cu__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Comproban__id_Mo__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Comproban__id_ti__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Cuenta__cta_padr__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Cuenta__id_Moned__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Cuenta__id_PlanD__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Departame__id_em__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Plan_Cuen__id_em__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="sContableModel.FK__Tipo_Camb__id_mo__52593CB8" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

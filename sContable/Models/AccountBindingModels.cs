@@ -49,7 +49,11 @@ namespace sContable.Models
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
     }
-
+    public class UserRegisterBindignModel: RegisterBindingModel
+    {
+        [Display(Name ="UserName")]
+        public string username { get; set; }
+    }
     public class RegisterExternalBindingModel
     {
         [Required]

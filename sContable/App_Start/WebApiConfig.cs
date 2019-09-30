@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
@@ -16,7 +17,9 @@ namespace sContable
             // Configure Web API para usar solo la autenticación de token de portador.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
+            //enable cors
+            //var attributes = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors();
             // Rutas de Web API
             config.MapHttpAttributeRoutes();
 
@@ -25,6 +28,7 @@ namespace sContable
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
